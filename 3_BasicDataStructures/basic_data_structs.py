@@ -86,9 +86,9 @@ print(myList)
 
 
 class TNode():
-    def __init__(self, data, parent):
+    def __init__(self, data, parent = None):
         self.parent   = parent
-        self.children = list()
+        self.children = []
         self.data     = data
 
     def addChild(self, childNode):
@@ -101,7 +101,7 @@ class Tree():
         self.root = None
 
     def add(self, data, parentNode=None):
-        newNode = TNode(data, parentNode)
+        newNode = TNode(data)
         if parentNode is not None:
             parentNode.addChild(newNode)
         elif self.root is None:
@@ -111,11 +111,54 @@ class Tree():
 
         return newNode
 
-T = Tree()
-rootNode = T.add(0)
-node01 = T.add('0-1', rootNode)
-node02 = T.add('0-2', rootNode)
-node13 = T.add('1-3', node01)
+    def __iter__(self):
+        stack = [self.root]
+        while len(stack):
+            node = stack.pop()
+            yield node.data
+            stack.extend( reversed(node.children))
 
+    def _dfs(self, node, datalist):
+        datalist.append(node.data)
+        for child_node in node.children:
+            self._dfs(child_node, datalist)
+
+    def _dfs_iter(self, node, datalist):
+        stack = [self.root]
+        while len(stack):
+            node = stack.pop()
+            datalist.append(node.data)
+            for child_node in reversed(node.children):
+                stack.append(child_node)
+
+
+    def _bfs(self, node, datalist):
+        queue = [node]
+        while len(queue):
+            node = queue.pop(0)
+            datalist.append(node.data)
+            for child_node in node.children:
+                queue.append(child_node)
+
+
+    def traverse(self, method = 'dfs'):
+        dataList = []
+        if method == 'dfs':
+            self._dfs_iter(self.root, dataList)
+        else:
+            self._bfs(self.root, dataList)
+        return dataList
+
+
+T = Tree()
+rootNode = T.add('1')
+node11 = T.add('11', rootNode)
+node12 = T.add('12', rootNode)
+node111 = T.add('111', node11)
+node112 = T.add('112', node11)
+node1111 = T.add('1111', node111)
+
+#datalist = T.traverse('dfs')
+datalist = list( x for x in T)
 
 pass
