@@ -118,10 +118,15 @@ class Tree():
             yield node.data
             stack.extend( reversed(node.children))
 
-    def _dfs(self, node, datalist):
-        datalist.append(node.data)
-        for child_node in node.children:
+    def _dfs(self, node, datalist, order = 'preorder'):
+        if order == 'preorder':
+            datalist.append(node.data)
+        for i,child_node in enumerate(node.children):
             self._dfs(child_node, datalist)
+            if order == 'inorder' and i != len(node.children)-1:
+                datalist.append(node.data)
+        if order == 'postorder':
+            datalist.append(node.data)
 
     def _dfs_iter(self, node, datalist):
         stack = [self.root]
@@ -130,6 +135,7 @@ class Tree():
             datalist.append(node.data)
             for child_node in reversed(node.children):
                 stack.append(child_node)
+
 
 
     def _bfs(self, node, datalist):
@@ -141,10 +147,10 @@ class Tree():
                 queue.append(child_node)
 
 
-    def traverse(self, method = 'dfs'):
+    def traverse(self, method = 'dfs', order="postorder"):
         dataList = []
         if method == 'dfs':
-            self._dfs_iter(self.root, dataList)
+            self._dfs(self.root, dataList, order)
         else:
             self._bfs(self.root, dataList)
         return dataList
@@ -158,7 +164,9 @@ node111 = T.add('111', node11)
 node112 = T.add('112', node11)
 node1111 = T.add('1111', node111)
 
-#datalist = T.traverse('dfs')
-datalist = list( x for x in T)
+datalist_pre = T.traverse('dfs', 'preorder')
+datalist_in = T.traverse('dfs', 'inorder')
+datalist_post = T.traverse('dfs', 'postorder')
+#datalist = list( x for x in T)
 
 pass
