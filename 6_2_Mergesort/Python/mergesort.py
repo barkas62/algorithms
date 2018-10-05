@@ -19,20 +19,19 @@ def mergesort( x ):
     x2 = mergesort(x2)
 
     # merge x1 and x2
-    i = 0; i1 = 0; i2 = 0
-    while i1<len(x1) and i2 < len(x2):
-        if x1[i1] < x2[i2]:
-            x[i] = x1[i1]; i1 += 1
+    i = 0
+    while x1 and x2:
+        if x1[0] < x2[0]:
+            x[i] = x1.pop(0)
         else:
-            x[i] = x2[i2]; i2 += 1
+            x[i] = x2.pop(0)
         i += 1
-    if i1<len(x1):
-        x[i:] = x1[i1:]
-    elif i2<len(x2):
-        x[i:] = x2[i2:]
+    if x1:
+        x[i:] = x1
+    elif x2:
+        x[i:] = x2
 
     return x
-
 
 x = [3,2,5,1,8,5,2,1]
 x = mergesort(x)
