@@ -162,6 +162,7 @@ node11 = T.add('11', rootNode)
 node12 = T.add('12', rootNode)
 node111 = T.add('111', node11)
 node112 = T.add('112', node11)
+node121 = T.add('121', node12)
 node1111 = T.add('1111', node111)
 
 datalist_pre = T.traverse('dfs', 'preorder')
