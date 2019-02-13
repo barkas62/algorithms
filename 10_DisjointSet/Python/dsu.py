@@ -16,6 +16,7 @@ class DisjointSet:
 
     def find(self, i):
         assert i < len(self.elements), 'DisjointSet.Find failed: out of range'
+        '''
         parents = []
         while i != self.elements[i].parent:
             parents.append(i)
@@ -24,11 +25,14 @@ class DisjointSet:
         for ip in parents:
             self.elements[ip].parent = i
         return i
-        '''    
+        '''
         if i != self.elements[i].parent:
             self.elements[i].parent = self.find( self.elements[i].parent )
+
+        #while i != self.elements[i].parent:
+        #    i = self.elements[i].parent
+
         return self.elements[i].parent
-        '''
 
     def union(self, i, j):
         ip = self.find(i)
@@ -43,17 +47,25 @@ class DisjointSet:
             self.elements[ip].rank += 1
 
 
-dsu = DisjointSet(size = 10)
+dsu = DisjointSet(size = 12)
 for i in range(10):
     dsu.add(i)
 
-for i in range(9):
-    dsu.union(i,i+1)
+dsu.elements[1].parent = 0
+dsu.elements[2].parent = 1
+dsu.elements[3].parent = 2
+
+res = dsu.find(3)
+
+#for i in range(9):
+#    dsu.union(i,i+1)
 
 dsu.union(0,2)
 dsu.union(2,4)
-dsu.union(4,6)
+# dsu.union(4,6)
 dsu.union(6,8)
+dsu.union(8,10)
+dsu.union(4,6)
 
 dsu.union(1,3)
 dsu.union(3,5)
