@@ -20,18 +20,19 @@ class Heap:
 
     def sift_down(self,i):
         assert 0<=i<len(self), 'Wrong arg for sift_down'
-        i_dn = i
-        while i < len(self) and i == i_dn:
-            i_dn = -1
+        while i < len(self):
+            i_dn = i
             l_id = Heap.lchild_id(i)
             if l_id < len(self) and self.data[l_id] > self.data[i]:
                 i_dn = l_id
             r_id = Heap.rchild_id(i)
             if r_id < len(self) and self.data[r_id] > self.data[i_dn]:
                 i_dn = r_id
-            if i_dn != -1:
+            if i_dn != i:
                 self.data[i], self.data[i_dn] = self.data[i_dn], self.data[i]
                 i = i_dn
+            else:
+                break
 
 
     def __init__(self):
