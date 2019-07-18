@@ -48,3 +48,4 @@ r_part = set()
 res = g.test_bipartite(l_part, r_part)
 
 pass
+
