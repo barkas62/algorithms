@@ -135,7 +135,7 @@ class BST:
             return node.value
 
         if node.right is not None:
-            node_min = self._findMin(nearest_node.right)
+            node_min = self._findMin(node.right)
             return node_min.value
         else:
             while node.parent is not None:
@@ -144,7 +144,7 @@ class BST:
                 node = node.parent
         return None
 
-    def prv(self,value):
+    def prv(self, value):
         if self.root is None:
             return None
 
@@ -164,13 +164,13 @@ class BST:
 
 
 T = BST()
-T.add_list( [5,2,6,1,3,7] )
+T.add_list( [5,2,6,1,3,7,4] )
 
 for v in T:
     print(str(v))
 
 res = T.nxt(7)
-res = T.prv(5)
+res = T.prv(6)
 
 pass
 

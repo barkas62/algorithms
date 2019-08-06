@@ -159,7 +159,7 @@ class Graph:
         '''
         self.reset()
         source.dist = 0
-        H = MinHeap( self.nodes )
+        H = MinHeap(self.nodes)
         while not H.empty():
             min_node = H.pop_min()
             for edge in min_node.edges:
