@@ -19,7 +19,7 @@ class PQueueMax:
 
     def __init__(self):
         self.pq = []  # all entries
-        self.entry_map = {} #defaultdict(dict)  # task : entry map
+        self.entry_map = defaultdict(defaultdict)  # task : entry map
 
     def __len__(self):
         return len(self.pq)
@@ -35,14 +35,23 @@ class PQueueMax:
             entry = heapq.heappop(self.pq)
             if entry.task is None:
                 continue
-            del self.entry_map[entry.task]
+            tasks = self.entry_map[entry.task]
+            del tasks[entry.counter]
+            if not tasks:
+                del self.entry_map[entry.task]
             return entry.task
         raise IndexError('Empty queue')
 
     def remove(self, task):
+        # all tasks (with diff counters)
         if task not in self.entry_map:
             return
-        self.entry_map[task].task = None
+        tasks = self.entry_map[task]
+        for entry in tasks.values():
+            entry.task = None
+        del self.entry_map[task]
+
+
 
 pqm = PQueueMax()
 pqm.push('task1', 5)
@@ -50,7 +59,7 @@ pqm.push('task2', 5)
 pqm.push('task2',10)
 pqm.push('task3', 1)
 
-#pqm.remove('task2')
+pqm.remove('task2')
 
 task1 = pqm.pop()
 task2 = pqm.pop()
