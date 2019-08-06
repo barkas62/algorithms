@@ -1,5 +1,6 @@
 import heapq
 from collections import defaultdict
+from time import time
 
 class PQueueMax:
     class Entry:
@@ -17,7 +18,6 @@ class PQueueMax:
                 return True
 
     def __init__(self):
-        self.counter = 0
         self.pq = []  # all entries
         self.entry_map = defaultdict(dict)  # task : entry map
 
@@ -25,8 +25,9 @@ class PQueueMax:
         return len(self.pq)
 
     def push(self, task, priority):
-        entry = PQueueMax.Entry(priority, self.counter, task)
-        self.entry_map[task][self.counter] = entry
+        counter = time()
+        entry = PQueueMax.Entry(priority, counter, task)
+        self.entry_map[task][counter] = entry
         self.counter += 1
         heapq.heappush(self.pq, entry)
 
@@ -55,7 +56,7 @@ pqm.push('task2', 5)
 pqm.push('task2',10)
 pqm.push('task3', 1)
 
-pqm.remove('task2')
+#pqm.remove('task2')
 
 task1 = pqm.pop()
 task2 = pqm.pop()
