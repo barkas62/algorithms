@@ -25,6 +25,7 @@ def RabinCarp( P : 'str', T : 'str' ) -> 'List[pos_of_P_in_T]':
         if i != n-m:
             ht = (ht - h*ord(T[i]))*d + ord(T[i+m])
 
+    return match_idx
 
 t = 'abcbc'
 p = 'bc'
