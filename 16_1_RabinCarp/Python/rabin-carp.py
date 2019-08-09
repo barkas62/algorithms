@@ -1,3 +1,4 @@
+from random import randint
 def RabinCarp( P : 'str', T : 'str' ) -> 'List[pos_of_P_in_T]':
     n = len(T)
     m = len(P)
@@ -6,6 +7,7 @@ def RabinCarp( P : 'str', T : 'str' ) -> 'List[pos_of_P_in_T]':
 
     q = 1<<31 - 1 # mersenne prime
     d = 256       # base for ASCI
+    d = randint(2, q-1)
 
     h = 1
     for i in range(1,m):

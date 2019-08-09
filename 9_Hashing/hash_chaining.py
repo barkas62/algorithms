@@ -14,8 +14,8 @@ class HashMap:
         self.items_count = 0
         self.size = size
         self.arr = [None]*size
-        self.hash_a = random.randint(0, HashMap.mers_prime)
-        self.hash_b = random.randint(0, HashMap.mers_prime)
+        self.hash_a = random.randint(1, HashMap.mers_prime)
+        self.hash_b = random.randint(1, HashMap.mers_prime)
         self.hash = lambda x: (((self.hash_a*x)%HashMap.mers_prime + self.hash_b)%HashMap.mers_prime)%size
 
     def put(self, key, val):
