@@ -96,6 +96,30 @@ class BST:
                 node = node.parent
         return None
 
+    def nxt_no_parent(self, value):
+        node = self._find(value, self.root)
+        if node.value > value:
+            return node.value
+        node = self._findNext_no_parent(node)
+        return node.value
+
+    def _findNext_no_parent(self, node):
+        assert node, Exception('Bad argument')
+
+        if node.right:
+            return self._findMin(node.right)
+
+        cur = self.root
+        nxt = None
+        while cur:
+            if node.value < cur.value:
+                nxt = cur
+                cur = node.left
+            elif node.value > cur.value:
+                cur = node.right
+            else:
+                break
+        return nxt
 
     def add(self, value):
         '''
@@ -169,7 +193,9 @@ T.add_list( [5,2,6,1,3,7,4] )
 for v in T:
     print(str(v))
 
-res = T.nxt(7)
+res = T.nxt(6)
+res1 = T.nxt_no_parent(6)
+
 res = T.prv(6)
 
 pass
