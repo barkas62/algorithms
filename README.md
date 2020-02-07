@@ -2,7 +2,7 @@
 
 The loose collection of CS Algorithms implementations, purely for self-education. 
 The goal is to have implementations in several languages: Python, C++, Java... 
-For now, it's mostly Python, but several are implemented in several languages (like Quicksort: Python & C++)
+For now, it's mostly Python, but some are implemented in several languages (like Quicksort: Python & C++)
 
 The detailed descriptions of algorithms and implementations are in public Evernote notebook:
 [https://www.evernote.com/pub/barkas/_algorithms](https://www.evernote.com/pub/barkas/_algorithms)
