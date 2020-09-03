@@ -47,7 +47,7 @@ Click on link, then choose 'View Notebook'. Evernote account not needed for view
 ***Strings:***
 - [Edit_Distance](https://github.com/barkas62/algorithms/tree/master/8_4_Edit_Distance/Python) 
 - [Longest Common Substring](https://github.com/barkas62/algorithms/tree/master/8_5_Longest_Common_Substring/Python)
-- [Rabin-Carp])(https://github.com/barkas62/algorithms/tree/master/16_1_RabinCarp/Python) 
+- [Rabin-Carp](https://github.com/barkas62/algorithms/tree/master/16_1_RabinCarp/Python) 
 - [Trie and Suffix Tree](https://github.com/barkas62/algorithms/tree/master/16_2_TrieAndSuffixTree/Python)
 - [Knuth-Morris-Pratt](https://github.com/barkas62/algorithms/tree/master/16_5_Knuth_Morris_Pratt/Python)
 
