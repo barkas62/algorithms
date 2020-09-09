@@ -12,6 +12,9 @@ class Node:
         self.rite = Node(data)
         return self.rite
 
+    def __radd__(self, data):
+        return data + self.data
+
 
 def dfs_preorder(node, func=None):
     if node is None:
@@ -99,6 +102,8 @@ class Sum:
         self.s = 0
     def __call__(self, node):
         self.s += node.data
+    def __str__(self):
+        return str(self.s)
 
 summator = Sum()
 '''
@@ -113,7 +118,11 @@ n7 = n3.add_rite(7)
 
 dfs_inorder(n4, func=fprn)
 print("---------------")
-dfs_inorder_iter(n4, func=fprn)
+
+summ = Sum()
+dfs_inorder_iter(n4, func=summ)
+print("Sum: "+str(summ))
+
 
 pass
 
