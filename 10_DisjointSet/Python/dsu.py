@@ -37,14 +37,14 @@ class DisjointSet:
     def union(self, i, j):
         ip = self.find(i)
         jp = self.find(j)
-
-        if self.elements[ip].rank < self.elements[jp].rank:
-            self.elements[ip].parent = jp
-        elif self.elements[ip].rank > self.elements[jp].rank:
-            self.elements[jp].parent = ip
-        else:  # ranks are equal
-            self.elements[jp].parent = ip
-            self.elements[ip].rank += 1
+        if ip != jp:
+            if self.elements[ip].rank < self.elements[jp].rank:
+                self.elements[ip].parent = jp
+            elif self.elements[ip].rank > self.elements[jp].rank:
+                self.elements[jp].parent = ip
+            else:  # ranks are equal
+                self.elements[jp].parent = ip
+                self.elements[ip].rank += 1
 
 
 dsu = DisjointSet(size = 12)
