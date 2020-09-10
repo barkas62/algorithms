@@ -1,22 +1,24 @@
 class DisjointSet:
     class Element:
-        def __init__(self, parent = -1, rank = -1):
+        def __init__(self, parent, rank = 0):
             self.parent = parent
             self.rank   = rank
 
-    def __init__(self, size = 0):
-        assert size >= 0, 'DisjointSet.__init__ failed: wrong size param'
-        self.elements = [ self.Element() for i in range(size) ]
+    def __init__(self, size):
+        assert size > 0, 'DisjointSet.__init__ failed: wrong size param'
+        self.elements = [ self.Element(i) for i in range(size) ]
 
-    def add(self, i):
-        if i >= len(self.elements):
-            self.elements.extend([self.Element() for i in range(i - len(self.elements) + 1)])
-        assert self.elements[i].parent == -1, 'DisjointSet.Add failed: element already present'
-        self.elements[i] = self.Element(i,0)
 
     def find(self, i):
-        assert i < len(self.elements), 'DisjointSet.Find failed: out of range'
         '''
+        Find set id that contains element i
+        :param i: element id
+        :return: set id
+        '''
+        if i >= len(self.elements):
+            raise  IndexError('DisjointSet.find failed: out of range')
+        '''
+        # Iterative variant
         parents = []
         while i != self.elements[i].parent:
             parents.append(i)
@@ -29,12 +31,15 @@ class DisjointSet:
         if i != self.elements[i].parent:
             self.elements[i].parent = self.find( self.elements[i].parent )
 
-        #while i != self.elements[i].parent:
-        #    i = self.elements[i].parent
-
         return self.elements[i].parent
 
     def union(self, i, j):
+        '''
+        Union of sets containing elements i and j
+        :param i: element id
+        :param j: element id
+        :return: None
+        '''
         ip = self.find(i)
         jp = self.find(j)
         if ip != jp:
@@ -47,35 +52,3 @@ class DisjointSet:
                 self.elements[ip].rank += 1
 
 
-dsu = DisjointSet(size = 12)
-for i in range(10):
-    dsu.add(i)
-
-dsu.elements[1].parent = 0
-dsu.elements[2].parent = 1
-dsu.elements[3].parent = 2
-
-res = dsu.find(3)
-
-#for i in range(9):
-#    dsu.union(i,i+1)
-
-dsu.union(0,2)
-dsu.union(2,4)
-# dsu.union(4,6)
-dsu.union(6,8)
-dsu.union(8,10)
-dsu.union(4,6)
-
-dsu.union(1,3)
-dsu.union(3,5)
-dsu.union(5,7)
-dsu.union(7,9)
-
-id7 = dsu.find(7)
-id8 = dsu.find(8)
-
-id1 = dsu.find(1)
-id2 = dsu.find(2)
-
-pass
