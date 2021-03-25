@@ -11,7 +11,7 @@ a = [1,2,'any', 5.]       # any objects
 a[1] = [1.1, 1.2, 1.3]    # replacing second element with the list
 
 b = [ i**2 for i in range(5) if i%2 ]  # comprehension, produces [1, 4]
-c = ( i**2 for i in range(5) if i %2 ) # generator expression, same as above, but takes less memory
+c = ( i**2 for i in range(5) if i%2 ) # generator expression, same as above, but takes less memory
 
 
 #============================================
