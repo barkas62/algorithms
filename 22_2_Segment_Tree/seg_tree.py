@@ -14,7 +14,7 @@ class SegTree:
         self._build(data, 0, 0, self.n_data - 1)
 
     def _build(self, data, root_idx, beg_idx, end_idx):
-        if beg_idx == end_idx: # it's a leaf
+        if beg_idx == end_idx:  # it's a leaf
             self.arr[root_idx] = data[beg_idx]
             return
 
@@ -70,8 +70,8 @@ class SegTree:
 
 nums = [18, 17, 13, 19, 15, 11, 20, 12, 33, 25]
 #nums = []
-#st = SegTree(nums, operator.add)
-st = SegTree(nums, max)
-res = st.query(2,8)
+st = SegTree(nums, operator.add)
+#st = SegTree(nums, max)
+res = st.query(2, 3)
 
 pass

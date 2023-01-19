@@ -1,8 +1,19 @@
 import sys
+import time
+
+def change_money_recursive(amount, coins):
+    if amount <= 0:
+        return 0
+    n_change = (1 << 31)
+    for coin in coins:
+        if amount - coin >= 0:
+            n_change = min(n_change, 1 + change_money_recursive(amount-coin, coins))
+    return n_change
+
 
 def change_money_dp( amount, Coins ):
-    n_change = [1<<31]*(amount+1) #count change
-    c_change = [0]*(amount+1)     # coin values for backprop
+    n_change = [1 << 31]*(amount+1)  # count change
+    c_change = [0]*(amount+1)        # coin values for backprop
     n_change[0] = 0
     for amt in range(1, amount+1):
         for coin_value in Coins:
@@ -19,7 +30,8 @@ def change_money_dp( amount, Coins ):
 
     return n_change[amount], change
 
-def change_money_memoization( amount, Coins, n_change):
+
+def change_money_memoization(amount, Coins, n_change):
     if not amount:
         return 0
 
@@ -35,13 +47,22 @@ def change_money_memoization( amount, Coins, n_change):
 
     return n_change[amount]
 
-Coins = [3,5,10,20,25,50]
-amount = 4
 
-#n_coin, change = change_money_dp(amount,Coins)
+Coins = [1, 3, 5, 10, 20, 25, 50]
+amount = 37
 
+start = time.time()
+n_change = change_money_recursive(amount, Coins)
+print("Recursive time: " + str(time.time() - start))
+
+start = time.time()
+n_coin, change = change_money_dp(amount, Coins)
+print("DP time: " + str(time.time() - start))
+
+start = time.time()
 n_change = [1<<31]*(amount+1)
-n_coin = change_money_memoization(amount,Coins, n_change)
+n_coin = change_money_memoization(amount, Coins, n_change)
+print("Memoization time: " + str(time.time() - start))
 
 pass
 
