@@ -28,6 +28,7 @@ public:
 		return query(i, j, 0, data_size_ - 1, 0);
 	}
 
+
 protected:
 	void build_tree(vector<T>& data, int beg, int end, int root) {
 		if (beg == end) {
@@ -63,5 +64,6 @@ protected:
 
 		return merge_func_(l_res, r_res);
 	}
+
 };
 
