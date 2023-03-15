@@ -15,9 +15,23 @@ class Node:
     def __radd__(self, data):
         return data + self.data
 
+from collections import deque
 
-def dfs_preorder(node, func=None):
-    if node is None:
+def bfs(root, func):
+    if root is None or func is None:
+        return
+    de = deque([root])
+    while de:
+        node = de.popleft()
+        func(node)
+        if node.left:
+            de.append(node.left)
+        if node.rite:
+            de.append(node.rite)
+
+
+def dfs_preorder(node, func):
+    if node is None or func is None:
         return
     if func:
         func(node)
@@ -39,11 +53,10 @@ def dfs_preorder_iter(root, func):
 
 
 def dfs_inorder(node, func=None):
-    if node is None:
+    if node is None or func is None:
         return
     dfs_inorder(node.left, func)
-    if func is not None:
-        func(node)
+    func(node)
     dfs_inorder(node.rite, func)
 
 
@@ -63,7 +76,7 @@ def dfs_inorder_iter(root, func):
                 break
 
 def dfs_postorder(node, func):
-    if node is None:
+    if node is None or func is None:
         return
     dfs_postorder(node.left, func)
     dfs_postorder(node.rite, func)
@@ -86,45 +99,34 @@ def dfs_postorder_iter(root, func):
         node = stack2.pop()
         func(node)
 
+if __name__ == "__main__":
+    root = Node(1)
+    n2 = root.add_left(2)
+    n3 = root.add_rite(3)
+    n2.add_left(4)
+    n2.add_rite(5)
 
-n4 = Node(4)
-n2 = n4.add_left(2)
-n2.add_left(1)
-n2.add_rite(3)
+    fprn = lambda node: print(str(node.data))
 
-n5 = n4.add_rite(5)
-n5.add_rite(6)
+    class Sum:
+        def __init__(self):
+            self.s = 0
+        def __call__(self, node):
+            self.s += node.data
+        def __str__(self):
+            return str(self.s)
 
-fprn = lambda node : print(str(node.data))
+    # bfs(root, fprn)
 
-class Sum:
-    def __init__(self):
-        self.s = 0
-    def __call__(self, node):
-        self.s += node.data
-    def __str__(self):
-        return str(self.s)
+    dfs_postorder_iter(root, func=fprn)
+    print("---------------")
 
-summator = Sum()
-'''
-n1 = Node(1)
-n2 = n1.add_left(2)
-n3 = n1.add_rite(3)
-n4 = n2.add_left(4)
-n5 = n2.add_rite(5)
-n6 = n3.add_left(6)
-n7 = n3.add_rite(7)
-'''
-
-dfs_inorder(n4, func=fprn)
-print("---------------")
-
-summ = Sum()
-dfs_inorder_iter(n4, func=summ)
-print("Sum: "+str(summ))
+    summ = Sum()
+    dfs_inorder_iter(root, func=summ)
+    print("Sum: "+str(summ))
 
 
-pass
+
 
 
 
