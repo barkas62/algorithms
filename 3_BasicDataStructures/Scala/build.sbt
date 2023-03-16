@@ -2,10 +2,8 @@ name := "BasicDataStructures"
 
 version := "0.1"
 
-scalaVersion := "2.11.12"
+scalaVersion := "2.13.5"
+
 libraryDependencies ++= Seq(
-   "org.scalactic" %% "scalactic" % "3.0.1"
-)
-libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "3.0.1" % "test"
+  "org.scalatest" %% "scalatest" % "3.2.11" % "test"
 )

@@ -1,15 +1,19 @@
-import org.scalatest.FunSuite
-//import MyList._
+import org.scalatest.GivenWhenThen
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest._
 
-class MyListTest extends FunSuite {
+class MyListTest extends AnyFunSuite with GivenWhenThen {
 
   test("Test MyList Copy") {
+    Given("a list of elements 1, 2, 3")
     val t1 = MyList(1,2,3)
+    When("copied")
     val t2 = t1.copy
+    Then("copied list should be equal to source list")
     assert(t1 == t2)
   }
 
-  test("testAppend") {
+  test("Test Append") {
     val t1 = MyList(1,2,3)
     val t2 = MyList(4,5,6)
     val t3 = t1 append t2

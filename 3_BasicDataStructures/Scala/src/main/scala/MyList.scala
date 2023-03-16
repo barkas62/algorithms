@@ -1,6 +1,6 @@
 
 
-object Main extends App {
+object List extends App {
   val t1 = MyList(1,2,3)
   val t2 = MyList(4,5,6)
   val t3 = t1 append t2
