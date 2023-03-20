@@ -49,7 +49,7 @@ def change_money_memoization(amount, Coins, n_change):
 
 
 Coins = [1, 3, 5, 10, 20, 25, 50]
-amount = 37
+amount = 12
 
 start = time.time()
 n_change = change_money_recursive(amount, Coins)
