@@ -40,6 +40,24 @@ class LinkedList():
         """
         return str(list(self))
 
+    def from_arr(self, arr):
+        if len(arr) == 0:
+            return
+        self.head = node = LLnode(arr[0])
+        for a in arr[1:]:
+            next = LLnode(a)
+            node.next = next
+            node = next
+        return
+
+    def to_arr(self):
+        arr = []
+        node = self.head
+        while node:
+            arr.append(node.val)
+            node = node.next
+        return arr
+
     def getTail(self):
         if self.head is None:
             return None
@@ -66,21 +84,30 @@ class LinkedList():
     def size(self):
         n = reduce(lambda x,y: x+1,self,0)  # self is iterable : __iter__ is provided
 
+    def reverse(self):
+        if self.head.next is None:
+            return
+        prv = None
+        cur = self.head
+        while True:
+            nxt = cur.next
+            cur.next = prv
+            if nxt is not None:
+                prv = cur
+                cur = nxt
+            else:
+                break
+        self.head = cur
+        return
+
 
 myList = LinkedList()
-myList.append(2)
-myList.prepend(1)
-myList.append(3)
-
-nsize = myList.size()
-
-for data in myList:
-    print(str(data))
-    for data1 in myList:
-        print ('----'+ str(data1))
+myList.from_arr([1,2,3,4])
+myList.reverse()
 
 print(myList)
 
+pass
 
 #===========   Tree =======================
 
